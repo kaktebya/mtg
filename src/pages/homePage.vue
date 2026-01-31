@@ -1,13 +1,19 @@
 <script setup>
 import { searchResults, searchQuery, searchProgress } from "@/AppState"
-import NoImageCard from "@/components/NoImageCard.vue"
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const goToSingleCard = (id) => {
+	router.push({path: `/single-card/${id}`})
+}
 </script>
 
 <template>
 	<div class="cards-grid" v-if="searchResults && searchResults.length > 0">
-		<div class="card" v-for="(card, index) in searchResults" :key="index">
-			<img class="card-image" :src="card?.image_uris?.normal" v-if="card.image_uris" />
-			<NoImageCard v-else :card="card" />
+		<div class="card" v-for="(card, index) in searchResults" :key="index" @click="goToSingleCard(card.id)">
+			<img class="card-image" :src="card?.image_uris?.normal" />
+			<!-- <NoImageCard v-else :card="card" /> -->
 		</div>
 	</div>
 	<div v-else-if="searchResults && searchResults.length === 0 && searchQuery" class="no-search no-cards">No cards found.</div>
@@ -25,6 +31,14 @@ import NoImageCard from "@/components/NoImageCard.vue"
 }
 .card {
 	aspect-ratio: 10 / 14.2;
+	cursor: pointer;
+	will-change: transform;
+	transition: transform .2s;
+	transform-origin: center;
+}
+.card:hover {
+	transform: scale(1.1);
+	z-index: 1;
 }
 .card-image {
 	width: 100%;

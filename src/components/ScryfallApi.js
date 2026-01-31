@@ -1,4 +1,4 @@
-export default async function fetchAllScryfallCards(query) {
+export async function fetchAllScryfallCards(query) {
 	let url = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(query)}`;
 	let allCards = [];
 
@@ -11,4 +11,11 @@ export default async function fetchAllScryfallCards(query) {
 	}
 
 	return allCards;
+}
+
+export async function getCardById(id) {
+	let url = `https://api.scryfall.com/cards/${encodeURIComponent(id)}`;
+	const res = await fetch(url);
+	const data = await res.json();
+	return data;
 }

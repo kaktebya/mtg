@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue"
-import fetchAllScryfallCards from "./ScryfallApi"
+import {fetchAllScryfallCards} from "./ScryfallApi"
 import SearchBanner from "./SearchBanner.vue"
 import { searchResults, searchQuery, searchProgress } from "@/AppState"
 
@@ -11,8 +11,8 @@ const getCards = async () => {
 	searchProgress.value = true
 	searchResults.value = null
 	searchQuery.value = input.value
-	searchResults.value = await fetchAllScryfallCards(input.value)
-	console.log(searchResults.value)
+	const resultCards = await fetchAllScryfallCards(input.value)
+	searchResults.value = resultCards.filter(c => c.image_uris)
 	input.value = ""
 	searchProgress.value = false
 }
