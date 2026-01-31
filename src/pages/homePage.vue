@@ -1,12 +1,12 @@
 <script setup>
-import { searchResults, searchQuery, searchProgress } from "@/AppState";
-import NoImageCard from "@/components/NoImageCard.vue";
+import { searchResults, searchQuery, searchProgress } from "@/AppState"
+import NoImageCard from "@/components/NoImageCard.vue"
 </script>
 
 <template>
 	<div class="cards-grid" v-if="searchResults && searchResults.length > 0">
 		<div class="card" v-for="(card, index) in searchResults" :key="index">
-			<img class="card-image" :src="card.imageUrl" v-if="card.imageUrl" />
+			<img class="card-image" :src="card?.image_uris?.normal" v-if="card.image_uris" />
 			<NoImageCard v-else :card="card" />
 		</div>
 	</div>

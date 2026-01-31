@@ -5,8 +5,6 @@ const props = defineProps({
 		type: Object,
 	},
 })
-
-console.log(props.card)
 </script>
 <template>
 	<div class="no-image-card">
@@ -14,16 +12,13 @@ console.log(props.card)
 			<div class="name">
 				<strong>{{ props.card.name }}</strong>
 			</div>
-			<div class="cost" v-if="props.card.manaCost">{{ props.card.manaCost }}</div>
+			<div class="cost" v-if="props.card.mana_cost">{{ props.card.mana_cost }}</div>
 		</div>
-		<div>Type: {{ props.card.type }}</div>
-		<div>Number: {{ props.card.number }}</div>
+		<div>Type: {{ props.card.type_line }}</div>
 		<div>Rarity: {{ props.card.rarity }}</div>
-		<div v-if="props.card.text" class="description">
-			{{ props.card.text }}
-			<div v-if="props.card.power && props.card.toughness" class="power">
-				{{ props.card.power }}/{{ props.card.toughness }}
-			</div>
+		<div v-if="props.card.oracle_text" class="description">
+			{{ props.card.oracle_text }}
+			<div v-if="props.card.power && props.card.toughness" class="power">{{ props.card.power }}/{{ props.card.toughness }}</div>
 		</div>
 	</div>
 </template>

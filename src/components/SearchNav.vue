@@ -1,32 +1,20 @@
 <script setup>
-import { ref } from "vue";
-import SearchBanner from "./SearchBanner.vue";
-import { searchResults, searchQuery, searchProgress } from "@/AppState";
+import { ref } from "vue"
+import fetchAllScryfallCards from "./ScryfallApi"
+import SearchBanner from "./SearchBanner.vue"
+import { searchResults, searchQuery, searchProgress } from "@/AppState"
 
-const input = ref();
+const input = ref()
 const getCards = async () => {
-	if (!input.value) return;
+	if (!input.value) return
 	// call the mtg api to get cards
-	searchProgress.value = true;
-	searchResults.value = null;
-	searchQuery.value = input.value;
-	searchResults.value = await fetchCardsByName(input.value);
-	input.value = "";
-	searchProgress.value = false;
-};
-
-async function fetchCardsByName(name) {
-	const encodedName = encodeURIComponent(name);
-	const url = `https://api.magicthegathering.io/v1/cards?name=${encodedName}`;
-
-	const response = await fetch(url);
-
-	if (!response.ok) {
-		throw new Error(`MTG API error: ${response.status}`);
-	}
-
-	const data = await response.json();
-	return data.cards;
+	searchProgress.value = true
+	searchResults.value = null
+	searchQuery.value = input.value
+	searchResults.value = await fetchAllScryfallCards(input.value)
+	console.log(searchResults.value)
+	input.value = ""
+	searchProgress.value = false
 }
 </script>
 
