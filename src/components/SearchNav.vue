@@ -22,7 +22,7 @@ const getCards = async () => {
 	<div class="search-wrapper">
 		<div class="flex">
 			<div>
-				<img class="mtg-logo" src="https://diversionsgames.com/wp-content/uploads/2020/12/magic-logo-300x102.png" />
+				<img @click="$router.push('/')"  class="mtg-logo" src="https://diversionsgames.com/wp-content/uploads/2020/12/magic-logo-300x102.png" />
 			</div>
 			<h1 class="header-text">MTG Card Database</h1>
 			<form @submit.prevent="getCards" class="mtg-form flex" style="gap: 0">
@@ -44,6 +44,7 @@ const getCards = async () => {
 	margin-right: 50px;
 	border-right: 2px solid var(--theme-primary-color--300);
 	padding-right: 50px;
+	cursor: pointer;
 }
 .flex {
 	display: flex;
