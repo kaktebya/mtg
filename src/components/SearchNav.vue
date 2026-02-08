@@ -3,7 +3,9 @@ import { ref } from "vue"
 import {fetchAllScryfallCards} from "./ScryfallApi"
 import SearchBanner from "./SearchBanner.vue"
 import { searchResults, searchQuery, searchProgress } from "@/AppState"
+import { useRouter } from "vue-router"
 
+const router = useRouter()
 const input = ref()
 const getCards = async () => {
 	if (!input.value) return
@@ -16,13 +18,18 @@ const getCards = async () => {
 	input.value = ""
 	searchProgress.value = false
 }
+
+const goHome = () => {
+	router.push({ path: '/' })
+
+}
 </script>
 
 <template>
 	<div class="search-wrapper">
 		<div class="flex">
 			<div>
-				<img @click="$router.push('/')"  class="mtg-logo" src="https://diversionsgames.com/wp-content/uploads/2020/12/magic-logo-300x102.png" />
+				<img @click="goHome()"  class="mtg-logo" src="https://diversionsgames.com/wp-content/uploads/2020/12/magic-logo-300x102.png" />
 			</div>
 			<h1 class="header-text">MTG Card Database</h1>
 			<form @submit.prevent="getCards" class="mtg-form flex" style="gap: 0">
