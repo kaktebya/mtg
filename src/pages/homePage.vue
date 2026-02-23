@@ -1,5 +1,5 @@
 <script setup>
-import { searchResults, searchQuery, searchProgress } from "@/AppState"
+import { searchResults, searchQuery, searchProgress, symbols } from "@/AppState"
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -7,6 +7,8 @@ const router = useRouter();
 const goToSingleCard = (id) => {
 	router.push({path: `/single-card/${id}`})
 }
+
+
 </script>
 
 <template>
